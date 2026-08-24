@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Glow Atelier | Maquiagem</title>
+  <style>
+    :root {
+      --rosa: #f26ca7;
+      --rosa-escuro: #d94f90;
+      --roxo: #7d4ed6;
+      --preto: #1d1a1f;
+      --cinza: #f5f1f7;
+      --branco: #ffffff;
+      --texto: #3b2d3a;
+      --sombra: 0 15px 35px rgba(126, 74, 145, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #fff7fb 0%, #fff 100%);
+      color: var(--texto);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1120px, 90%);
+      margin: 0 auto;
+    }
+
+    header {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(125, 78, 214, 0.08);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--preto);
+    }
+
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--rosa), var(--roxo));
+      display: grid;
+      place-items: center;
+      color: var(--branco);
+      font-size: 1.2rem;
+      box-shadow: var(--sombra);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: var(--texto);
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      color: var(--rosa-escuro);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 26px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--rosa), var(--roxo));
+      color: var(--branco);
+      box-shadow: var(--sombra);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: var(--branco);
+      color: var(--preto);
+      border: 1px solid rgba(29, 26, 31, 0.08);
+    }
+
+    .hero {
+      padding: 80px 0 60px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: #ffe4f1;
+      color: var(--rosa-escuro);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 5vw, 5rem);
+      line-height: 1.06;
+      color: var(--preto);
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      font-size: 1.08rem;
+      color: #5a4657;
+      max-width: 560px;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--texto);
+      font-weight: 600;
+    }
+
+    .stars {
+      color: #ffb700;
+      letter-spacing: 2px;
+      font-size: 1.2rem;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(125, 78, 214, 0.08);
+      border-radius: 24px;
+      box-shadow: var(--sombra);
+      padding: 18px 20px;
+    }
+
+    .mini-card {
+      top: 40px;
+      right: 40px;
+      width: 200px;
+    }
+
+    .mini-card strong {
+      display: block;
+      font-size: 1.7rem;
+      color: var(--preto);
+    }
+
+    .mini-card span {
+      color: #6a5870;
+      font-size: 0.95rem;
+    }
+
+    .main-product {
+      width: min(420px, 88%);
+      background: linear-gradient(180deg, #fef3fa 0%, #f8ecff 100%);
+      border-radius: 32px;
+      box-shadow: var(--sombra);
+      padding: 18px;
+      position: relative;
+    }
+
+    .product-image {
+      background: linear-gradient(135deg, #ffd7ee, #ddc7ff 45%, #f7d3c3);
+      border-radius: 24px;
+      height: 440px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-image::before {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.35);
+      top: 48px;
+      left: 95px;
+    }
+
+    .product-image::after {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 320px;
+      border-radius: 100px 100px 90px 90px;
+      background: linear-gradient(180deg, #f9d5e7, #7d4ed6);
+      bottom: 0;
+      left: 120px;
+      box-shadow: inset -16px -18px 35px rgba(62, 30, 83, 0.22);
+    }
+
+    .social-proof {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 34px;
+      flex-wrap: wrap;
+    }
+
+    .proof-box {
+      background: var(--branco);
+      border-radius: 18px;
+      padding: 20px 18px;
+      min-width: 160px;
+      box-shadow: 0 10px 25px rgba(41, 24, 52, 0.04);
+      border: 1px solid rgba(61, 40, 74, 0.05);
+    }
+
+    .proof-box strong {
+      display: block;
+      font-size: 1.7rem;
+      color: var(--preto);
+    }
+
+    .proof-box span {
+      color: #625067;
+      font-size: 0.92rem;
+    }
+
+    .section {
+      padding: 70px 0;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 34px;
+      flex-wrap: wrap;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 3vw, 3rem);
+      line-height: 1.15;
+      color: var(--preto);
+    }
+
+    .section-header p {
+      max-width: 560px;
+      color: #5a4657;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 26px;
+    }
+
+    .product-card {
+      background: var(--branco);
+      border-radius: 24px;
+      border: 1px solid rgba(125, 78, 214, 0.08);
+      box-shadow: 0 14px 28px rgba(26, 14, 35, 0.05);
+      overflow: hidden;
+    }
+
+    .product-thumb {
+      height: 260px;
+      background: linear-gradient(135deg, #fce7f7, #e2d4ff, #ffe3d1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-thumb::before {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.28);
+      top: 20px;
+      left: 48px;
+    }
+
+    .product-thumb::after {
+      content: "";
+      position: absolute;
+      width: 110px;
+      height: 160px;
+      border-radius: 30px 30px 60px 60px;
+      background: linear-gradient(180deg, #f9d9e4, #ae7ae8);
+      bottom: -10px;
+      left: calc(50% - 55px);
+      box-shadow: inset -10px -12px 20px rgba(60, 33, 78, 0.18);
+    }
+
+    .product-info {
+      padding: 22px 20px 24px;
+    }
+
+    .product-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #f8eaf6;
+      color: var(--rosa-escuro);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .price {
+      font-weight: 800;
+      color: var(--preto);
+      font-size: 1.3rem;
+    }
+
+    .product-card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 10px;
+      color: var(--preto);
+    }
+
+    .product-card p {
+      color: #5e4d5d;
+      margin-bottom: 18px;
+    }
+
+    .about {
+      background: linear-gradient(135deg, #fff7fb 0%, #f4edff 100%);
+      border-radius: 32px;
+      padding: 40px 36px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .about-visual {
+      height: 420px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #ffdfe9, #dbc4ff 50%, #ffe1d2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-visual::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+      top: 50px;
+      left: 90px;
+    }
+
+    .about-visual::after {
+      content: "";
+      position: absolute;
+      width: 170px;
+      height: 300px;
+      border-radius: 90px 90px 70px 70px;
+      background: linear-gradient(180deg, #f7d7ea, #9d67f4);
+      bottom: 0;
+      left: calc(50% - 85px);
+      box-shadow: inset -14px -16px 25px rgba(52, 31, 76, 0.2);
+    }
+
+    .about-content p {
+      color: #5a4657;
+      margin: 16px 0 22px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .feature {
+      background: rgba(255,255,255,0.6);
+      border: 1px solid rgba(125, 78, 214, 0.08);
+      border-radius: 18px;
+      padding: 18px 16px;
+    }
+
+    .feature strong {
+      display: block;
+      font-size: 1.2rem;
+      color: var(--preto);
+      margin-bottom: 8px;
+    }
+
+    .feature span {
+      color: #624f66;
+      font-size: 0.92rem;
+    }
+
+    .cta {
+      text-align: center;
+      padding: 90px 0 80px;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, #1d1a1f, #3a2d43);
+      border-radius: 28px;
+      padding: 52px 30px;
+      color: var(--branco);
+      box-shadow: var(--sombra);
+    }
+
+    .cta-box h2 {
+      color: var(--branco);
+      margin-bottom: 14px;
+    }
+
+    .cta-box p {
+      max-width: 700px;
+      margin: 0 auto 28px;
+      color: rgba(255,255,255,0.8);
+    }
+
+    footer {
+      padding: 18px 0 38px;
+      text-align: center;
+      color: #675669;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .about,
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 52px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      .hero-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 58px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#" class="logo">
+        <span class="logo-mark">G</span>
+        <span>Glow Atelier</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Menu principal">
+        <a href="#produtos">Produtos</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#colecoes">Coleções</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <a class="btn btn-primary" href="#produtos">Comprar agora</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Beauty Essentials</span>
+          <h1>Realce natural para cada momento.</h1>
+          <p>
+            Descubra produtos de maquiagem premium que unem pigmentação intensa,
+            textura leve e acabamento sofisticado para uma pele impecável todos os dias.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#produtos">Confira a coleção</a>
+            <a class="btn btn-secondary" href="#sobre">Saiba mais</a>
+          </div>
+
+          <div class="rating">
+            <div class="stars" aria-label="Avaliação 5 estrelas">★★★★★</div>
+            <span>4,9/5 por mais de 12 mil clientes</span>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="Produto de maquiagem destaque">
+          <div class="card mini-card">
+            <span>Mais vendido</span>
+            <strong>+ 32k</strong>
+            <span>unidades entregues</span>
+          </div>
+
+          <div class="main-product">
+            <div class="product-image" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container social-proof">
+        <div class="proof-box">
+          <strong>250k+</strong>
+          <span>produtos vendidos</span>
+        </div>
+        <div class="proof-box">
+          <strong>120+</strong>
+          <span>tonalidades</span>
+        </div>
+        <div class="proof-box">
+          <strong>48h</strong>
+          <span>entrega expressa</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="produtos">
+      <div class="container">
+        <div class="section-header">
+          <h2>Essentials da sua rotina</h2>
+          <p>Formulados para brilho, conforto e cobertura impecável em todas as ocasiões.</p>
+        </div>
+
+        <div class="products-grid">
+          <article class="product-card">
+            <div class="product-thumb" aria-hidden="true"></div>
+            <div class="product-info">
+              <div class="product-meta">
+                <span class="tag">Base</span>
+                <span class="price">R$ 89</span>
+              </div>
+              <h3>Base Velvet Glow</h3>
+              <p>Acabamento natural com efeito hidratado e cobertura suave à média.</p>
+              <a href="#" class="btn btn-secondary">Adicionar</a>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-thumb" aria-hidden="true" style="background:linear-gradient(135deg, #f9e0f6, #e7d0ff, #f6d9c7);"></div>
+            <div class="product-info">
+              <div class="product-meta">
+                <span class="tag">Boca</span>
+                <span class="price">R$ 59</span>
+              </div>
+              <h3>Batom Satin Rose</h3>
+              <p>Cor intensa e maciez instantânea para um acabamento luxuoso e confortável.</p>
+              <a href="#" class="btn btn-secondary">Adicionar</a>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-thumb" aria-hidden="true" style="background:linear-gradient(135deg, #fde3ee, #f1dbff, #ffe0d3);"></div>
+            <div class="product-info">
+              <div class="product-meta">
+                <span class="tag">Olhos</span>
+                <span class="price">R$ 72</span>
+              </div>
+              <h3>Sombra Prism</h3>
+              <p>Textura sedosa com brilho sofisticado e alta pigmentação para olhar marcante.</p>
+              <a href="#" class="btn btn-secondary">Adicionar</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sobre">
+      <div class="container about">
+        <div class="about-visual" aria-hidden="true"></div>
+
+        <div class="about-content">
+          <span class="eyebrow">Nossa história</span>
+          <h2>Beleza com cuidado e autenticidade.</h2>
+          <p>
+            Na Glow Atelier, acreditamos que maquiagem deve realçar sua essência e valorizar
+            cada detalhe. Por isso, criamos fórmulas pensadas para pele sensível, uso diário e
+            ocasiões especiais com acabamento premium.
+          </p>
+          <p>
+            Cada coleção é desenvolvida com ingredientes selecionados, cores inspiradas na moda e
+            uma experiência de uso que mistura tecnologia, conforto e elegância.
+          </p>
+
+          <div class="features">
+            <div class="feature">
+              <strong>100%</strong>
+              <span>sem crueldade</span>
+            </div>
+            <div class="feature">
+              <strong>Vegan</strong>
+              <span>fórmulas conscientes</span>
+            </div>
+            <div class="feature">
+              <strong>Hipoalergênico</strong>
+              <span>para pele sensível</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="colecoes">
+      <div class="container">
+        <div class="cta-box">
+          <h2>Entre na nova temporada de brilho</h2>
+          <p>
+            Explore nossas coleções exclusivas com tons sofisticados, acabamento impecável e itens
+            indispensáveis para a sua rotina de beleza.
+          </p>
+          <a href="#contato" class="btn btn-primary">Fale com a gente</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contato">
+    © 2026 Glow Atelier • maquiagem premium • contato@glowatelier.com
+  </footer>
+</body>
+</html>
